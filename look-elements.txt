@@ -1,0 +1,49 @@
+http://modeemi.fi/~tuomov/ion-doc-3/ionconf/node5.html
+
+
+*-*-tagged
+*-*-*-dragged
+*-*-submenu
+
+frame
+	active | inactive | quasiactive
+
+	-floating
+	-tiled
+		-alt
+	-transient
+
+tab
+	active | inactive
+	selected | unselected
+
+	-frame
+		tagged | not_tagged
+		dragged | not_dragged
+		activity | no_activity
+
+		-floating
+		-tiled
+			-alt
+		-transient
+	-info
+	-menuentry
+		submenu
+		activity
+
+		-bigmenu
+
+input
+	-edln
+		cursor
+		selection
+	-message
+	-menu
+		-bigmenu
+moveres_display
+actnotify
+stdisp
+	-dock
+	-statusbar
+		<statusbar-component-name> + normal | important | critical
+

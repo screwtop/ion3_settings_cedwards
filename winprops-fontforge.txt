@@ -1,0 +1,26 @@
+Ion3 winprop notes for FontForge
+
+Class:	fontforge	[note lowercase!]
+Instance:	fontforge
+
+various window titles:
+"Open Font"
+"FontForge"	splash screen (make transient?)
+"Layers"	
+"Tools"	tool palette
+"<GLYPH> at <INDEX> from <FONT-TITLE> <UNICODE-LETTER-NAME>
+"Font Information for <FONT-TITLE>"
+"Metrics For <FONT-TITLE>"
+"Preferences..."
+"Point Info"
+"Set Width..."	transient
+"Kern Pair Closeup..."	maybe transient
+
+Specific issues:
+I think the program tries to manage the Tools (and perhaps Layers) windows itself.  They certainly come and go all the time, resist closing, and generally go crazy when tiled.
+
+Try the following xres:
+Gdraw.GWidget.BrokenPalettes
+
+Alternatively, View > Palettes > Docked Palettes will place the palettewindows within the glyph editor window.
+

@@ -1,0 +1,8 @@
+Functionality that'd be nice to have in Ion:
+
+ - A Windows Start Menu equivalent: a menu for launching any application, grouped by category.  The launchers could switch to the appropriate workspace (if appropriate).
+ - A Window Quick Launch Bar equivalet: a single-click menu for a small number of frequently-used applications and utilities.
+ - Some way of keeping the scratchpad frame on top while allowing focus to move to windows underneath.
+ - A Workspace + Frame or Workspace + application hierarchical switcher.  Maybe even include switching between documents if relevant/possible.
+
+
