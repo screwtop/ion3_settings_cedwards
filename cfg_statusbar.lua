@@ -93,3 +93,15 @@ mod_statusbar.launch_statusd{
     },
 }
 
+
+
+
+-- CME: adding binding for context menu on statusbar.  "WStatusBar" doesn't seem to be recognised. :^(  Nor "WInfoWin".
+-- But supposedly WStatusBar is recognised:
+-- http://www.modeemi.cs.tut.fi/~tuomov/ion-doc-3/ionconf/node4.html#sec:bindings
+ioncore.defbindings("WStatusBar", {
+--    bdoc("Switch to n:th object (workspace, full screen client window) within current screen."),
+--	kpress(META.."1", "WScreen.switch_nth(_, 0)"),
+	mpress("Button3", "mod_menu.pmenu(_, _sub, 'main_menu')"),
+})
+

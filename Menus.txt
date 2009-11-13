@@ -1,0 +1,29 @@
+Rethinking the Ion menu design
+
+Ion stuff:
+	Help
+	About
+	Styles
+	Session
+System:
+	Run...
+	Manual Page
+	Lock Screen
+Applications:
+	Terminal
+	Audio:
+		...
+	Graphics:
+		...
+	...
+
+Contextual stuff:
+	Windows:
+		tag stuff: toggle tag, attach
+		Info
+		Close
+		Kill
+	Frames:
+		Close
+		Rename
+
