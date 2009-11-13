@@ -1,5 +1,7 @@
 -- Main Ion3 configuration file.
 -- See cfg_ioncore.lua for keybindings and menu definitions.
+-- Actually, I've now split that into cfg_bindings.lua and cfg_menus.lua, which now have to be included here specifically, I guess instead of ioncore.
+-- Strictly speaking, should a cfg_X.lua files correspond to a mod_X?
 
 
 -- "Windows" key or "Alt"?  Alt is easier to type with one hand, but collides with a lot of other software.  Little finger on Windows key is maybe OK.  It would put an otherwise pointless key to use, and free up the likes of Alt-F4 for closing windows (old habits...).
@@ -26,7 +28,9 @@ ioncore.set{
 
 -- Essential/normal Ion stuff:
 --dopath("cfg_defaults")
-dopath("cfg_ioncore")
+--dopath("cfg_ioncore")
+dopath("cfg_menus.lua")
+dopath("cfg_bindings.lua")
 dopath("cfg_kludges")
 dopath("cfg_layouts")
 
