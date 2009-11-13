@@ -1,5 +1,6 @@
 -- cfg_ioncore.lua is the core Ion configuration file, for keybindings and menu definitions.
 -- (See cfg_ion.lua for basic settings and modules to include.)
+-- This is not (or should not be) being used any more, since I've split menu defs and binding defs into the cfg_menus.lua and cfg_bindings.lua files, and cfg_ion.lua no longer sources this file.
 
 
 -- CME: some of my additions:

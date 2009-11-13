@@ -15,6 +15,7 @@ defmenu("main_menu", {
 	submenu("Utilities",	"utils_menu"),
 	submenu("Workspaces",	"workspacelist"),
 	submenu("Windows",	"windowlist"),
+	submenu("Recent",	"focuslist"),
 })
 
 
@@ -35,7 +36,7 @@ defmenu("ion_menu", {
 --	submenu("Session",		"sessionmenu"),
 	menuentry("Save",		"ioncore.snapshot()"),
 	menuentry("Restart Ion",	"ioncore.restart()"),
-	menuentry("Run twm",	"ioncore.restart_other('twm')"),
+	menuentry("Restart TWM",	"ioncore.restart_other('twm')"),
 	menuentry("Exit",		"ioncore.shutdown()"),
 })
 
@@ -73,47 +74,83 @@ defmenu("sessionmenu", {
     menuentry("Exit",           "ioncore.shutdown()"),
 })
 
+-- I'd like a Tags submenu, but some of these functions are only applicable to certain types of object, so will try a couple of separate submenus.
+-- tag_menu is deprecated; there are now separate submenus for different classes.
+defmenu("tag_menu", {
+	menuentry("Toggle Tag",	"WRegion.set_tagged(_, 'toggle')"),
+	menuentry("Attach Tagged",	"ioncore.tagged_attach(_)"),
+	menuentry("Clear Tag",		"ioncore.tagged_clear(_)"),
+
+})
+
+defmenu("wgroup_tag_menu", {
+	menuentry("Toggle Tag",	"WRegion.set_tagged(_, 'toggle')"),
+--	menuentry("Attach Tagged",	"ioncore.tagged_attach(_)"),
+	menuentry("Clear Tag",		"ioncore.tagged_clear(_)"),
+})
+
+defmenu("wgroupws_tag_menu", {
+--	menuentry("Toggle Tag",	"WRegion.set_tagged(_, 'toggle')"),
+	menuentry("Attach Tagged",	"ioncore.tagged_attach(_)", {priority = 1}),	-- Want this to appear at the top of the merged Tags menu.  Bah, only they don't really merge.
+--	menuentry("Clear Tag",		"ioncore.tagged_clear(_)"),
+})
+
 
 -- Context menu (frame actions etc.)
 defctxmenu("WFrame", "Frame", {
-    -- Note: this propagates the close to any subwindows; it does not
-    -- destroy the frame itself, unless empty. An entry to destroy tiled
-    -- frames is configured in cfg_tiling.lua.
-    menuentry("Close",          "WRegion.rqclose_propagate(_, _sub)"),
+	-- Note: this propagates the close to any subwindows; it does not
+	-- destroy the frame itself, unless empty. An entry to destroy tiled
+	-- frames is configured in cfg_tiling.lua.
+	menuentry("Close Frame",          "WRegion.rqclose_propagate(_, _sub)"),
+	-- CME: hey, shouldn't there be a rename frame entry here somewhere?  Maybe I deleted it accidentally once upon...
+	menuentry("Rename Frame", "mod_query.query_renameframe(_)"),	-- CME
+	menuentry("Window Info",   "mod_query.show_tree(_, _sub)"),	-- This is really more specialised than this, but I can't get it to work elsewhere.
 
-	submenu("Workspaces",   "workspacelist"),	-- CME
-	submenu("Windows",      "windowlist"),	-- CME
+	-- Simply a copy of main_menu
+	submenu("System",	"system_menu"),
+	submenu("Ion",		"ion_menu"),
+	submenu("Applications",	"apps_menu"),
+	submenu("Utilities",	"utils_menu"),
+	submenu("Workspaces",   "workspacelist"),
+	submenu("Windows",      "windowlist"),
+	submenu("Recent",	"focuslist"),
 
+--	submenu("Tags",	"tag_menu"),
 
     -- Low-priority entries
     -- TODO: make Toggle Tag and Attach Tag go together; maybe even create a Tag submenu.
-    menuentry("Attach tagged", "ioncore.tagged_attach(_)", { priority = 0 }),
-    menuentry("Clear tags",    "ioncore.tagged_clear()", { priority = 0 }),
+--    menuentry("Attach tagged", "ioncore.tagged_attach(_)", { priority = 0 }),
+--    menuentry("Clear tags",    "ioncore.tagged_clear()", { priority = 0 }),
 
-	-- CME: hey, shouldn't there be a rename frame entry here somewhere?  Maybe I deleted it accidentally once upon...
-	menuentry("Rename Frame", "mod_query.query_renameframe(_)"),	-- CME
-	menuentry("Window Info",   "mod_query.show_tree(_, _sub)"),
+
 })
 
 
 -- Context menu for groups (workspaces, client windows)
 defctxmenu("WGroup", "Group", {
-    menuentry("Toggle tag",     "WRegion.set_tagged(_, 'toggle')"),
-    menuentry("De/reattach",    "ioncore.detach(_, 'toggle')"), 
+--    menuentry("Toggle tag",     "WRegion.set_tagged(_, 'toggle')"),
+    menuentry("WGroup De/reattach",    "ioncore.detach(_, 'toggle')"), 
+
+	submenu("WGroup Tags",	"wgroup_tag_menu"),
 })
 
 
 -- Context menu for workspaces
 defctxmenu("WGroupWS", "Workspace", {
-    menuentry("Close",          "WRegion.rqclose(_)"),
-    menuentry("Rename",         "mod_query.query_renameworkspace(nil, _)"),
-    menuentry("Attach tagged",  "ioncore.tagged_attach(_)"),
+    menuentry("WGroupWS Close",          "WRegion.rqclose(_)"),
+    menuentry("WGroupWS Rename Workspace",         "mod_query.query_renameworkspace(nil, _)"),
+--    menuentry("Attach tagged",  "ioncore.tagged_attach(_)"),
+
+	submenu("WGroupWS Tags",	"wgroupws_tag_menu"),
 })
 
 
 -- Context menu for client windows
 defctxmenu("WClientWin", "Client window", {
-	menuentry("Kill",           "WClientWin.kill(_)"),	-- CME: this should go just after Close
+--	menuentry("WClientWin Window Info",   "mod_query.show_tree(_, _sub)"),	-- Doesn't work here with _sub as 2nd arg.  It's show_tree(mplex, reg, max_depth), BTW.
+--	menuentry("WClientWin Close",          "WRegion.rqclose_propagate(_, _sub)"),
+	submenu("WClientWin Tags",	"wgroupws_tag_menu"),
+	menuentry("WClientWin Kill",           "WClientWin.kill(_)"),	-- CME: this should go just after Close
 })
 
 

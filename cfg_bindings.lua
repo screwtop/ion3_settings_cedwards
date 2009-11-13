@@ -65,8 +65,11 @@ defbindings("WScreen", {
     kpress(META.."0", "WScreen.switch_nth(_, 9)"),
     
     bdoc("Switch to next/previous object within current screen."),
-    kpress(META.."comma", "WScreen.switch_prev(_)"),
-    kpress(META.."period", "WScreen.switch_next(_)"),
+	kpress(META.."comma", "WScreen.switch_prev(_)"),
+	kpress(META.."period", "WScreen.switch_next(_)"),
+	-- CME: plus also a pseudo Alt-Tab alike:
+	kpress(META..SHIFT.."Tab",	"WScreen.switch_prev(_)"),
+	kpress(META.."Tab",		"WScreen.switch_next(_)"),
 
     submap(META.."K", {
         bdoc("Go to first region demanding attention or previously active one."),
@@ -111,14 +114,24 @@ defbindings("WScreen", {
     bdoc("Display the window list menu."),
     mpress("Button2", "mod_menu.pmenu(_, _sub, 'windowlist')"),
 
+
+	-- CME: WindowsKey+ArrowKey to shift focus around in the tile set; nowrap is less confusing, and when do you ever have so many frames across the screen that wrapping is even convenient?:
+	kpress(META.."Left",	"ioncore.goto_next(_chld, 'left', {nowrap=1})"),
+	kpress(META.."Right",	"ioncore.goto_next(_chld, 'right', {nowrap=1})"),
+	kpress(META.."Up",	"ioncore.goto_next(_chld, 'up', {nowrap=1})"),
+	kpress(META.."Down",	"ioncore.goto_next(_chld, 'down', {nowrap=1})"),
+	-- This works, but maybe cfg_tiling.lua is the correct place for it...?
+	-- See WFrame.toplevel bindings for switching to next/prev tab within the current frame.
+
+
     bdoc("Forward-circulate focus."),
     -- '_chld' used here stands to for an actual child window that may not
     -- be managed by the screen itself, unlike '_sub', that is likely to be
     -- the managing group of that window. The right/left directions are
     -- used instead of next/prev, because they work better in conjunction
     -- with tilings.
-    kpress(META.."Tab", "ioncore.goto_next(_chld, 'right')", 
-           "_chld:non-nil"),
+--    kpress(META.."Tab", "ioncore.goto_next(_chld, 'right')",          "_chld:non-nil"),
+--[[
     submap(META.."K", { 
         bdoc("Backward-circulate focus."),
         kpress("AnyModifier+Tab", "ioncore.goto_next(_chld, 'left')", 
@@ -128,7 +141,7 @@ defbindings("WScreen", {
         kpress("AnyModifier+R", "WRegion.rqorder(_chld, 'front')",
                "_chld:non-nil"),
     }),
-
+]]
 })
 
 
@@ -268,6 +281,7 @@ defbindings("WFrame", {
     mdrag("Button2@tab", "WFrame.p_tabdrag(_)"),
 
 	-- CME:
+	-- TODO: revisit (remove?) this.
     kpress(META.."J", "ioncore.goto_next(_, 'next')"),
 	-- What about 'prev'/'previous'? 
 })
@@ -278,6 +292,11 @@ defbindings("WFrame.toplevel", {
     bdoc("Query for a client window to attach."),
     kpress(META.."A", "mod_query.query_attachclient(_)"),
     
+	-- CME: Windows+Ctrl+ArrowKey to go next/prev tab within frame (can we use nowrap here too?):
+	kpress(META..CTRL.."Right", "WFrame.switch_next(_)"),
+	kpress(META..CTRL.."Left", "WFrame.switch_prev(_)"),
+
+	
     submap(META.."K", {
         -- Display tab numbers when modifiers are released
         submap_wait("ioncore.tabnum.show(_)"),

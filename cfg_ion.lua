@@ -5,11 +5,13 @@
 
 
 -- "Windows" key or "Alt"?  Alt is easier to type with one hand, but collides with a lot of other software.  Little finger on Windows key is maybe OK.  It would put an otherwise pointless key to use, and free up the likes of Alt-F4 for closing windows (old habits...).
-SHIFT="shift+"
-CTRL="control+"
+SHIFT="Shift+"
+CTRL="Control+"
 ALT="Mod1+"
-WINDOWS="Mod4+"
+WINDOWS="Mod4+"	-- This IS case-sensitive, and should be "Mod" even though xmodmap says "mod".
 WINDOWS_L="Super_L+"
+--WINDOWS_R="Super_R+"
+--??="Hyper_L+"
 META=WINDOWS
 --META="Mod4+"	
 --META=WINDOWS_L	-- No, gives "insane key combination" error.
@@ -21,6 +23,7 @@ ioncore.set{
 	--dblclick_delay=250,
 	--kbresize_delay=1500,
 	opaque_resize=true,
+	edge_resistance=200,	-- The default is so unrestrictive that I wasn't even aware of it!
 	warp=false,
 	--default_ws_type="WIonWS",
 }

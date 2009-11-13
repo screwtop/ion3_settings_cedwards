@@ -19,8 +19,13 @@ Applications:
 
 Contextual stuff:
 	Windows:
-		tag stuff: toggle tag, attach
+		Close
+		Rename
 		Info
+		Tags:
+			Toggle Tag
+			Attach Tag [frames, not windows?]
+			Clear Tags
 		Close
 		Kill
 	Frames:
