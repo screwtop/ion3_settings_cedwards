@@ -42,7 +42,7 @@ mod_statusbar.create{
     -- CME:
     -- TODO: pad custom meters to a fixed length to avoid things moving around all the time.
     -- ...or maybe put all the variable-length stuff on one side
-    template = "%systray_files %systray_launcher %systray_instalaunch  | %hostname | Load: %<load  |  %cmeactiveinfo_clientname on %cmeactiveinfo_wsname:%cmeactiveinfo_framename (PID=%cmeactiveinfo_pid)  %|systray_dialog %systray%filler  %systray_notifier %systray_log_viewer %systray_bfilter  CPU: %systray_monitor_cpu  RAM: %systray_monitor_ram  Disk: %systray_monitor_io  %systray_time ",
+    template = "%systray_files %systray_launcher %systray_instalaunch  %cmeactiveinfo_clientname on %cmeactiveinfo_wsname:%cmeactiveinfo_framename (PID=%cmeactiveinfo_pid)  %|systray_dialog %systray%filler  %systray_notifier %systray_log_viewer %systray_bfilter  %systray_jack  CPU: %systray_monitor_cpu  RAM: %systray_monitor_ram  Disk: %systray_monitor_io  %systray_time ",
 --    template = "%systray_files %systray_launcher  | %hostname | Load: %<load  |  %cmeactiveinfo_clientname on %cmeactiveinfo_wsname:%cmeactiveinfo_framename (PID=%cmeactiveinfo_pid)  %|systray_dialog %systray%filler  | %systray_notifier %systray_log_viewer | CPU: %cpu_0 %cpu_1 %cpu_2 %cpu_3 %systray_monitor_cpu | %iostat %systray_monitor_io %systray_time ",
 }
 

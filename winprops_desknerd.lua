@@ -61,6 +61,14 @@ defwinprop{
 	statusbar = "systray_monitor_ram",
 }
 
+defwinprop{
+	class = "Jack.tcl",
+	instance = "jack.tcl",
+	name = "DeskNerd_JACK.*",
+	statusbar = "systray_jack",
+}
+
+
 -- No longer needed, now that the CPU meters are implemented in a single script:
 defwinprop { class = "Cpu.tcl", instance = "cpu.tcl #2", name = "DeskNerd_CPUMeter.*", statusbar = "systray_monitor_cpu", }
 defwinprop { class = "Cpu.tcl", instance = "cpu.tcl #3", name = "DeskNerd_CPUMeter.*", statusbar = "systray_monitor_cpu", }
