@@ -1,0 +1,13 @@
+Ion3 event types observed:
+
+activated
+deinit
+inactivated
+map
+name
+pseudoactivated
+pseudoinactivated
+set_manager
+unset_manager
+unmap
+

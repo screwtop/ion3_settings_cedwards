@@ -1,0 +1,25 @@
+screen_managed_changed_hook
+	region_notify_hook	name
+
+ioncore.get_hook("region_notify_hook"):add(update_workspace_wrap)
++ioncore.get_hook("screen_managed_changed_hook"):add(update_workspace)
+
+ * check that region actually is a workspace, i.e. managed by a WScreen
+
+Might be nice to be able to send signals to the process through Ion also, e.g. STOP, KILL (even though we already have Ion's Kill menu and xkill).
+
+current_???, e.g.
+
+current_workspace (current_workspace_name, current_workspace_number)
+current_frame (current_frame_name)
+current_pid
+current_command ()
+
+
+ioncore.defer(function()
+	mod_statusbar.inform('current_workspace_name', ??)
+	mod_statusbar.inform('current_pid', ??)
+	-- ...
+	mod_statusbar.update()
+end)
+

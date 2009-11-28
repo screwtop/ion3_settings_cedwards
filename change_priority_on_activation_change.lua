@@ -1,3 +1,5 @@
+-- IMPORTANT: see prioritise_on_focus.lua for the new version of this.
+--
 -- Lua script for Ion to boost/lower the scheduling priority of an X11 client process when it gains/loses focus.
 -- CME 2009-02-12
 -- Yay, it works!
