@@ -2,7 +2,14 @@ screen_managed_changed_hook
 	region_notify_hook	name
 
 ioncore.get_hook("region_notify_hook"):add(update_workspace_wrap)
-+ioncore.get_hook("screen_managed_changed_hook"):add(update_workspace)
+	WRegion
+	string	activated, inactivated, etc.
+
+ioncore.get_hook("screen_managed_changed_hook"):add(update_workspace)
+	reg	WFrame	The frame
+	mode	string	switchonly, reorder, add, remove
+	sw	bool	did a switch occur?
+	sub	WRegion	managed region affected
 
  * check that region actually is a workspace, i.e. managed by a WScreen
 
@@ -22,4 +29,32 @@ ioncore.defer(function()
 	-- ...
 	mod_statusbar.update()
 end)
+
+ioncore.warn(ioncore.current():name()) gives you the title of the current window (as appears on the titlebar).
+ioncore.current():manager():name() also works; will generally give you the name of a WGroupCW, not the workspace.
+There's a WRegion.screen_of(WRegion reg), but it returns "WRootWin" rather than a workspace name.
+parent, name, manager, rootwin_of
+
+WMPlex is the base class ofr regions that multiplex other regions, i.e. can display only one of a number of regions at once.  I think this includes workspaces (WGroupWS), and tabbed frames (WFrame).  Note that a screen (WScreen) is indeed a physical screen.  A screen can be displaying one workspace at any one time.
+
+WGroupWS is a type of WGroup for workspaces.
+WGroupCW is for groups of client windows (appearing as multiple tabs).
+
+There's already a table.map(f,t)!
+
+mod_query.warn(mplex, str)
+e.g.
+mod_query.warn(ioncore.find_manager(ioncore.current(), "WMPlex"), "Hello!")
+
+mod_query.show_tree(ioncore.find_manager(ioncore.current(), "WMPlex"), ioncore.current(), 3)
+
+mod_query.query_yesno(ioncore.find_manager(ioncore.current(), "WMPlex"), "Whaddya know?", function() ioncore.warn("You said yes!") end)
+
+-- You can indeed create a second statusbar on the second screen:
+sb2 = mod_statusbar.create({screen=1, fullsize=true, template=" StatusBar2! %date  %sb2_test "})
+-- Yep, it's a WStatusBar. :^)
+
+mod_statusbar.inform('sb2_test', 'Hello, World!')
+mod_statusbar.update()
+-- Cool!
 

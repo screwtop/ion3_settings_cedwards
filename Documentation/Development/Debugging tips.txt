@@ -1,0 +1,12 @@
+probably should use ioncore.warn for debugging?
+
+Notes on some handy debugging techniques within Ion/Lua:
+
+		ioncore.warn("region:xid() = " .. region:xid())
+		ioncore.warn("region.__typename = " .. region.__typename)
+
+ioncore.warn("property table length = " .. #pid_property_table)
+
+for i,v in pairs(pid_property_table) do
+	ioncore.warn(i .. " ->" .. v)
+end
